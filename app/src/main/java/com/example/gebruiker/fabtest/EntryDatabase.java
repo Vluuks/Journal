@@ -4,7 +4,9 @@ package com.example.gebruiker.fabtest;
  * Created by Gebruiker on 23-2-2018.
  */
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -18,7 +20,6 @@ import java.util.ArrayList;
 public class EntryDatabase extends SQLiteOpenHelper {
 
     // Database fields
-    private static final String GIT = "meh";
     private static final String _ID = "_id";
     private static final String TABLE_NAME = "entries";
     private static final String ENTRY_CONTENT = "subject";
@@ -51,22 +52,26 @@ public class EntryDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+
         sqLiteDatabase.execSQL(CREATE_TABLE);
+
+        ContentValues cv = new ContentValues();
+        cv.put(ENTRY_TITLE, "Tim is lief");
+        cv.put(ENTRY_CONTENT, "super leuk dit allemaal woehoe");
+        cv.put(ENTRY_MOOD, "happy");
+        sqLiteDatabase.insert(TABLE_NAME, null, cv);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+        public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
 
-//    public ArrayList<Entry> getAllEntries() {
-//
-//    }
-//
-//    public Entry getEntry(int id) {
-//
-//    }
-
-
+    public Cursor getAllEntries() {
+        SQLiteDatabase database = instance.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME;
+        Cursor cursor = database.rawQuery(query, null);
+        return cursor;
+    }
 }
