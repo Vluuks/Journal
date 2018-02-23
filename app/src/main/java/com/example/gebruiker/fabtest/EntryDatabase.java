@@ -9,6 +9,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -20,19 +21,19 @@ import java.util.ArrayList;
 public class EntryDatabase extends SQLiteOpenHelper {
 
     // Database fields
-    private static final String _ID = "_id";
-    private static final String TABLE_NAME = "entries";
-    private static final String ENTRY_CONTENT = "subject";
-    private static final String ENTRY_TITLE = "title";
-    private static final String ENTRY_MOOD = "mood";
-    private static final String ENTRY_TIMESTAMP = "timestamp";
+    public static final String _ID = "_id";
+    public static final String TABLE_NAME = "entries";
+    public static final String ENTRY_CONTENT = "subject";
+    public static final String ENTRY_TITLE = "title";
+    public static final String ENTRY_MOOD = "mood";
+    public static final String ENTRY_TIMESTAMP = "timestamp";
 
     // Creating table query
     private static final String CREATE_TABLE = "create table " + TABLE_NAME + "(" +
             _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             ENTRY_TITLE + " TEXT NOT NULL, " +
+            ENTRY_MOOD + " TEXT NOT NULL, " +
             ENTRY_CONTENT + " TEXT NOT NULL, " +
-            ENTRY_MOOD + "TEXT, " +
             ENTRY_TIMESTAMP + " DATETIME DEFAULT CURRENT_TIMESTAMP" + ");";
 
     private static EntryDatabase instance;
@@ -59,19 +60,34 @@ public class EntryDatabase extends SQLiteOpenHelper {
         cv.put(ENTRY_TITLE, "Tim is lief");
         cv.put(ENTRY_CONTENT, "super leuk dit allemaal woehoe");
         cv.put(ENTRY_MOOD, "happy");
-        sqLiteDatabase.insert(TABLE_NAME, null, cv);
+
+        long test = sqLiteDatabase.insert(TABLE_NAME, null, cv);
+        Log.d("EntryDatabase", Long.toString(test));
+        Log.d("EntryDatabase", "IN ONCREATE" + Integer.toString(sqLiteDatabase.getVersion()));
     }
 
     @Override
         public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+
+        Log.d("EntryDatabase", "called upgrade");
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
 
-    public Cursor getAllEntries() {
+    public void upgradeDB() {
         SQLiteDatabase database = instance.getReadableDatabase();
+        onUpgrade(database, 1, 31);
+        Log.d("EntryDatabase", Integer.toString(database.getVersion()));
+    }
+
+    public Cursor getAllEntries() {
+
+        SQLiteDatabase database = instance.getReadableDatabase();
+
+
         String query = "SELECT * FROM " + TABLE_NAME;
         Cursor cursor = database.rawQuery(query, null);
+        Log.d("test", cursor.toString());
         return cursor;
     }
 }

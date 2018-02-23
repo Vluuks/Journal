@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
@@ -19,7 +20,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         EntryDatabase database = EntryDatabase.getInstance(this);
+        database.upgradeDB();
+
         Cursor cursor = database.getAllEntries();
+        Log.d("MainActivity", Integer.toString(cursor.getColumnCount()));
+
         EntryAdapter adapter = new EntryAdapter(this, R.layout.row_entry, cursor);
 
         ListView listView = findViewById(R.id.listView);
