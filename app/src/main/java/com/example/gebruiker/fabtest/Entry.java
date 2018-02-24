@@ -7,13 +7,29 @@ package com.example.gebruiker.fabtest;
 public class Entry {
 
     private String title, content, mood;
-    private long timestamp;
+    private String timestamp;
+    private int id;
 
-    public Entry(String title, String content, String mood, long timestamp) {
+    public Entry(String title, String content, String mood) {
+        this.title = title;
+        this.content = content;
+        this.mood = mood;
+    }
+
+    public Entry(String title, String content, String mood, String timestamp, int id) {
         this.title = title;
         this.content = content;
         this.mood = mood;
         this.timestamp = timestamp;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -40,11 +56,11 @@ public class Entry {
         this.mood = mood;
     }
 
-    public long getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(long timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 }

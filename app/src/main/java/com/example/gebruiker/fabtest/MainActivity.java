@@ -19,14 +19,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EntryDatabase database = EntryDatabase.getInstance(this);
-        database.upgradeDB();
+        Log.d("MainActivity", "onCreate");
 
+        EntryDatabase database = EntryDatabase.getInstance(this);
         Cursor cursor = database.getAllEntries();
-        Log.d("MainActivity", Integer.toString(cursor.getColumnCount()));
 
         EntryAdapter adapter = new EntryAdapter(this, R.layout.row_entry, cursor);
-
         ListView listView = findViewById(R.id.listView);
         listView.setAdapter(adapter);
     }
@@ -34,5 +32,12 @@ public class MainActivity extends AppCompatActivity {
     public void addEntry(View view) {
         Intent intent = new Intent(MainActivity.this, EntryActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Log.d("MainActivity", "onResume");
     }
 }

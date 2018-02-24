@@ -69,16 +69,13 @@ public class EntryDatabase extends SQLiteOpenHelper {
 
     @Override
         public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-
-        Log.d("EntryDatabase", "called upgrade");
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
 
     public void upgradeDB() {
         SQLiteDatabase database = instance.getReadableDatabase();
-        onUpgrade(database, 1, 31);
-        Log.d("EntryDatabase", Integer.toString(database.getVersion()));
+        onUpgrade(database, database.getVersion(), database.getVersion() + 1);
     }
 
     public Cursor getAllEntries() {
@@ -89,5 +86,16 @@ public class EntryDatabase extends SQLiteOpenHelper {
         Cursor cursor = database.rawQuery(query, null);
         Log.d("test", cursor.toString());
         return cursor;
+    }
+
+    public void insert(Entry entry) {
+
+        ContentValues cv = new ContentValues();
+        cv.put(ENTRY_TITLE, entry.getTitle());
+        cv.put(ENTRY_CONTENT, entry.getContent());
+        cv.put(ENTRY_MOOD, entry.getMood());
+
+        SQLiteDatabase database = instance.getWritableDatabase();
+        database.insert(TABLE_NAME, null, cv);
     }
 }

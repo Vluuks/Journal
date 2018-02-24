@@ -43,12 +43,15 @@ public class EntryActivity extends AppCompatActivity {
         }
     }
 
-    public void validateEntry(String title, String content, String mood) {
+    public boolean validateEntry(String title, String content, String mood) {
 
         if(TextUtils.isEmpty(title) || TextUtils.isEmpty(content) || TextUtils.isEmpty(mood)) {
             Toast toast = Toast.makeText(this, "Please fill in all fields and select a mood", Toast.LENGTH_SHORT);
             toast.show();
+
+            return false;
         }
+        return true;
     }
 
     public void submitEntry(View view) {
@@ -56,8 +59,13 @@ public class EntryActivity extends AppCompatActivity {
         String title = ((EditText)findViewById(R.id.etTitle)).getText().toString();
         String content = ((EditText)findViewById(R.id.etContent)).getText().toString();
 
-        validateEntry(title, content, mood);
+        if (validateEntry(title, content, mood)) {
 
-        Log.d("EntryActivity", title + content + mood);
+            Entry entry = new Entry(title, content, mood);
+            EntryDatabase database = EntryDatabase.getInstance(this);
+            database.insert(entry);
+            finish();
+        }
+
     }
 }
