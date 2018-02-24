@@ -3,21 +3,24 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_gravity="left"
-        app:srcCompat="@mipmap/ic_launcher" />
+        android:layout_gravity="center_vertical"
+        app:srcCompat="@mipmap/ic_launcher"
+        />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_weight="5">
+        android:layout_weight="5"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
 
         <TextView
             android:id="@+id/tvTitle"
@@ -38,6 +41,7 @@
             android:id="@+id/tvMood"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="timestamp" />
+            android:text="timestamp"
+            />
     </LinearLayout>
 </LinearLayout>

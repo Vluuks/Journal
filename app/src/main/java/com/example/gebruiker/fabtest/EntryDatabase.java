@@ -1,9 +1,5 @@
 package com.example.gebruiker.fabtest;
 
-/**
- * Created by Gebruiker on 23-2-2018.
- */
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -42,7 +38,7 @@ public class EntryDatabase extends SQLiteOpenHelper {
         super(context, name, factory, version);
     }
 
-    public static EntryDatabase getInstance(Context context){
+    public static EntryDatabase getInstance(Context context) {
 
         if(instance == null) {
             instance = new EntryDatabase(context, "com.example.renske.journalapp.EntryDatabase", null, 1);
@@ -61,9 +57,14 @@ public class EntryDatabase extends SQLiteOpenHelper {
         cv.put(ENTRY_CONTENT, "super leuk dit allemaal woehoe");
         cv.put(ENTRY_MOOD, "happy");
 
-        long test = sqLiteDatabase.insert(TABLE_NAME, null, cv);
-        Log.d("EntryDatabase", Long.toString(test));
-        Log.d("EntryDatabase", "IN ONCREATE" + Integer.toString(sqLiteDatabase.getVersion()));
+        sqLiteDatabase.insert(TABLE_NAME, null, cv);
+
+        cv.put(ENTRY_TITLE, "Hoi wat leuk!");
+        cv.put(ENTRY_CONTENT, "lekker geluncht");
+        cv.put(ENTRY_MOOD, "happy");
+
+        sqLiteDatabase.insert(TABLE_NAME, null, cv);
+
     }
 
     @Override
@@ -83,7 +84,6 @@ public class EntryDatabase extends SQLiteOpenHelper {
     public Cursor getAllEntries() {
 
         SQLiteDatabase database = instance.getReadableDatabase();
-
 
         String query = "SELECT * FROM " + TABLE_NAME;
         Cursor cursor = database.rawQuery(query, null);
