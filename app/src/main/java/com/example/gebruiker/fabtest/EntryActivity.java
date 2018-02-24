@@ -3,13 +3,14 @@ package com.example.gebruiker.fabtest;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+/*
+    Allows the user to create a journal entry with title, contents and a mood.
+*/
 public class EntryActivity extends AppCompatActivity {
 
     String mood;
@@ -18,14 +19,9 @@ public class EntryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entry);
-
     }
 
-    /* Sets the mood that will be entered into the database. */
     public void setMood(View view) {
-
-        Log.d("EntryActivity", "in onClick");
-
         ImageView imageButton = (ImageView) view;
         switch(imageButton.getId()) {
             case R.id.mood1:
@@ -60,12 +56,11 @@ public class EntryActivity extends AppCompatActivity {
         String content = ((EditText)findViewById(R.id.etContent)).getText().toString();
 
         if (validateEntry(title, content, mood)) {
-
             Entry entry = new Entry(title, content, mood);
             EntryDatabase database = EntryDatabase.getInstance(this);
             database.insert(entry);
+
             finish();
         }
-
     }
 }

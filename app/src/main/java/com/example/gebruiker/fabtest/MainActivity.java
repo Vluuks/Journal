@@ -14,17 +14,18 @@ import android.widget.ListView;
  */
 public class MainActivity extends AppCompatActivity {
 
+    EntryAdapter adapter;
+    EntryDatabase database;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.d("MainActivity", "onCreate");
-
-        EntryDatabase database = EntryDatabase.getInstance(this);
+        database = EntryDatabase.getInstance(this);
         Cursor cursor = database.getAllEntries();
 
-        EntryAdapter adapter = new EntryAdapter(this, R.layout.row_entry, cursor);
+        adapter = new EntryAdapter(this, R.layout.row_entry, cursor);
         ListView listView = findViewById(R.id.listView);
         listView.setAdapter(adapter);
     }
@@ -34,10 +35,14 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void updateListView() {
+        Cursor cursor = database.getAllEntries();
+        adapter.swapCursor(cursor);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
-
-        Log.d("MainActivity", "onResume");
+        updateListView();
     }
 }
