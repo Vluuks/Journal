@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         updateListView();
     }
 
-
     private class EntryClickListener implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
