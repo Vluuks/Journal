@@ -79,7 +79,7 @@ public class EntryDatabase extends SQLiteOpenHelper {
 
         SQLiteDatabase database = instance.getReadableDatabase();
 
-        String query = "SELECT * FROM " + TABLE_NAME;
+        String query = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + ENTRY_ID + " DESC";
         Cursor cursor = database.rawQuery(query, null);
         Log.d("test", cursor.toString());
         return cursor;
