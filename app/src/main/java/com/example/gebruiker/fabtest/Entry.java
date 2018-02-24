@@ -1,10 +1,12 @@
 package com.example.gebruiker.fabtest;
 
+import java.io.Serializable;
+
 /**
  * Created by Gebruiker on 23-2-2018.
  */
 
-public class Entry {
+public class Entry implements Serializable {
 
     private String title, content, mood;
     private String timestamp;
@@ -16,12 +18,11 @@ public class Entry {
         this.mood = mood;
     }
 
-    public Entry(String title, String content, String mood, String timestamp, int id) {
+    public Entry(String title, String content, String mood, String timestamp) {
         this.title = title;
         this.content = content;
         this.mood = mood;
         this.timestamp = timestamp;
-        this.id = id;
     }
 
     public int getId() {
