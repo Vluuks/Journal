@@ -7,8 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.util.ArrayList;
-
 /**
  * Created by Renske on 22/02/2018.
  * test github 2 trying to commit everything instead of just java
@@ -17,20 +15,20 @@ import java.util.ArrayList;
 public class EntryDatabase extends SQLiteOpenHelper {
 
     // Database fields
-    public static final String _ID = "_id";
+    public static final String ENTRY_ID = "_id";
     public static final String TABLE_NAME = "entries";
     public static final String ENTRY_CONTENT = "subject";
     public static final String ENTRY_TITLE = "title";
     public static final String ENTRY_MOOD = "mood";
-    public static final String ENTRY_TIMESTAMP = "timestamp";
+    public static final String ENTRY_TIMESTAMP = "entrytimestamp";
 
     // Creating table query
     private static final String CREATE_TABLE = "create table " + TABLE_NAME + "(" +
-            _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            ENTRY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             ENTRY_TITLE + " TEXT NOT NULL, " +
             ENTRY_MOOD + " TEXT NOT NULL, " +
             ENTRY_CONTENT + " TEXT NOT NULL, " +
-            ENTRY_TIMESTAMP + " DATETIME DEFAULT CURRENT_TIMESTAMP" + ");";
+            ENTRY_TIMESTAMP + " DATETIME DEFAULT (DATETIME(CURRENT_TIMESTAMP, 'LOCALTIME'))" + ");";
 
     private static EntryDatabase instance;
 
@@ -97,5 +95,16 @@ public class EntryDatabase extends SQLiteOpenHelper {
 
         SQLiteDatabase database = instance.getWritableDatabase();
         database.insert(TABLE_NAME, null, cv);
+    }
+
+    public void delete(int id) {
+
+        Log.d("entryDatabase", "delete");
+
+        SQLiteDatabase database = instance.getWritableDatabase();
+        String whereClause = ENTRY_ID + "=?";
+        String[] whereArgs = new String[] { String.valueOf(id) };
+        database.delete(TABLE_NAME, whereClause, whereArgs);
+
     }
 }

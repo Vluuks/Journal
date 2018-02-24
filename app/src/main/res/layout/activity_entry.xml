@@ -27,6 +27,7 @@
         android:ems="10"
         android:inputType="textMultiLine"
         android:lines="25"
+        android:gravity="left|top"
         android:layout_weight="3"
         android:hint="Content"
         android:textSize="12sp"

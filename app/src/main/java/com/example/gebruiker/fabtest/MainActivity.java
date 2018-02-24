@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new EntryClickListener());
+        listView.setOnItemLongClickListener(new EntryLongClickListener());
     }
 
     public void addEntry(View view) {
@@ -71,6 +72,12 @@ public class MainActivity extends AppCompatActivity {
     private class EntryLongClickListener implements AdapterView.OnItemLongClickListener {
         @Override
         public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+            Cursor cursor = (Cursor) adapterView.getItemAtPosition(i);
+            int id = cursor.getInt(cursor.getColumnIndex(EntryDatabase.ENTRY_ID));
+
+            database.delete(id);
+            updateListView();
 
             return true;
         }
