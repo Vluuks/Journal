@@ -2,9 +2,9 @@ package com.example.gebruiker.fabtest;
 
 import java.io.Serializable;
 
-/**
- * Created by Gebruiker on 23-2-2018.
- */
+/*
+    Model class which represents the journal entry object.
+*/
 
 public class Entry implements Serializable {
 

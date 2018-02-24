@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+/*
+    Allows the user to view the details of a journal entry, including content.
+*/
 public class DetailActivity extends AppCompatActivity {
 
     @Override

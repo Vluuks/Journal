@@ -5,7 +5,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 /*
@@ -22,8 +23,14 @@ public class EntryActivity extends AppCompatActivity {
     }
 
     public void setMood(View view) {
-        ImageView imageButton = (ImageView) view;
-        switch(imageButton.getId()) {
+
+        ImageButton imageButton = (ImageButton) view;
+        int id = imageButton.getId();
+
+        resetButtonColors(id);
+        imageButton.setBackground(getResources().getDrawable(R.drawable.button_mood_selected));
+
+        switch(id) {
             case R.id.mood1:
                 mood = "sad";
                 break;
@@ -34,8 +41,22 @@ public class EntryActivity extends AppCompatActivity {
                 mood = "good";
                 break;
             case R.id.mood4:
-                mood = "fantastic";
+                mood = "great";
                 break;
+        }
+    }
+
+    /* Method that resets all buttons to original color except the one that was clicked. */
+    public void resetButtonColors(int id) {
+
+        LinearLayout layout = (LinearLayout) findViewById(R.id.moodLayout);
+
+        for (int i = 0; i < layout.getChildCount(); i++) {
+            ImageButton b = (ImageButton) layout.getChildAt(i);
+
+            if (b.getId() != id) {
+                b.setBackground(getResources().getDrawable(R.drawable.button_mood));
+            }
         }
     }
 

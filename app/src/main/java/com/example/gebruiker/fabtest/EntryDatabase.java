@@ -7,11 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-/**
- * Created by Renske on 22/02/2018.
- * test github 2 trying to commit everything instead of just java
- */
-
+/*
+    Helper class for database that stores all entries, with their mood,
+    timestamp, title and content.
+*/
 public class EntryDatabase extends SQLiteOpenHelper {
 
     // Database fields
@@ -66,7 +65,7 @@ public class EntryDatabase extends SQLiteOpenHelper {
     }
 
     @Override
-        public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
@@ -103,6 +102,5 @@ public class EntryDatabase extends SQLiteOpenHelper {
         String whereClause = ENTRY_ID + "=?";
         String[] whereArgs = new String[] { String.valueOf(id) };
         database.delete(TABLE_NAME, whereClause, whereArgs);
-
     }
 }

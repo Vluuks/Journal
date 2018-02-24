@@ -7,22 +7,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-/**
- * Created by Renske on 23/02/2018.
- */
-
+/*
+    Adapter which takes the cursor with all entries and renders mood,
+    timestamp and title. Shows an image corresponding to mood as well.
+*/
 public class EntryAdapter extends ResourceCursorAdapter {
 
     public EntryAdapter(Context context, int layout, Cursor cursor) {
         super(context, layout, cursor);
     }
 
-
-//    Use Cursor.getInt(columnIndex) to retrieve the value of one column as an integer.
-//    Use Cursor.getColumnIndex(name) to get the column index for a column named name.
-//    Call view.findViewById() to get references to the controls in the row layout.
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
 
@@ -50,8 +44,6 @@ public class EntryAdapter extends ResourceCursorAdapter {
                 break;
 
         }
-
-
 
         tvTitle.setText(title);
         tvTimestamp.setText(timestamp);

@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/behindgreeneyes"
             android:text="Entry Title"
+            android:paddingStart="5dp"
             android:shadowColor="@color/colorAccent"
             android:textSize="40sp"
             android:textColor="@color/colorAccent"/>
