@@ -53,13 +53,13 @@ public class EntryDatabase extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
         cv.put(ENTRY_TITLE, "Tim is lief");
         cv.put(ENTRY_CONTENT, "super leuk dit allemaal woehoe");
-        cv.put(ENTRY_MOOD, "happy");
+        cv.put(ENTRY_MOOD, "great");
 
         sqLiteDatabase.insert(TABLE_NAME, null, cv);
 
         cv.put(ENTRY_TITLE, "Hoi wat leuk!");
-        cv.put(ENTRY_CONTENT, "lekker geluncht");
-        cv.put(ENTRY_MOOD, "happy");
+        cv.put(ENTRY_CONTENT, "dit is een test entry");
+        cv.put(ENTRY_MOOD, "good");
 
         sqLiteDatabase.insert(TABLE_NAME, null, cv);
 
@@ -98,8 +98,6 @@ public class EntryDatabase extends SQLiteOpenHelper {
     }
 
     public void delete(int id) {
-
-        Log.d("entryDatabase", "delete");
 
         SQLiteDatabase database = instance.getWritableDatabase();
         String whereClause = ENTRY_ID + "=?";

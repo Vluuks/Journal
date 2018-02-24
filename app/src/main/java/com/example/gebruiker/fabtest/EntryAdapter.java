@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.widget.ResourceCursorAdapter;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -28,10 +29,29 @@ public class EntryAdapter extends ResourceCursorAdapter {
         TextView tvTitle = view.findViewById(R.id.tvTitle);
         TextView tvTimestamp = view.findViewById(R.id.tvTimestamp);
         TextView tvMood = view.findViewById(R.id.tvMood);
+        ImageView ivMood = view.findViewById(R.id.imageView);
 
         String title = cursor.getString(cursor.getColumnIndex(EntryDatabase.ENTRY_TITLE));
         String timestamp = cursor.getString(cursor.getColumnIndex(EntryDatabase.ENTRY_TIMESTAMP));
         String mood = cursor.getString(cursor.getColumnIndex(EntryDatabase.ENTRY_MOOD));
+
+        switch(mood) {
+            case "sad":
+                ivMood.setImageResource(R.drawable.sad);
+                break;
+            case "meh":
+                ivMood.setImageResource(R.drawable.meh);
+                break;
+            case "good":
+                ivMood.setImageResource(R.drawable.good);
+                break;
+            case "great":
+                ivMood.setImageResource(R.drawable.great);
+                break;
+
+        }
+
+
 
         tvTitle.setText(title);
         tvTimestamp.setText(timestamp);

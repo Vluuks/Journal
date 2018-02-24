@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:padding="10dp"
+        android:rotation="90"
         app:srcCompat="@mipmap/ic_launcher"
         />
 
@@ -28,6 +29,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/behindgreeneyes"
             android:text="Entry Title"
+            android:shadowColor="@color/colorAccent"
             android:textSize="40sp"
             android:textColor="@color/colorAccent"/>
 
@@ -42,7 +44,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="timestamp"
-            android:textStyle="italic"
-            />
+            android:textStyle="italic"/>
     </LinearLayout>
 </LinearLayout>
