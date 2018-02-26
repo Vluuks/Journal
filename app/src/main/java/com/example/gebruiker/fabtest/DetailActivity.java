@@ -46,4 +46,6 @@ public class DetailActivity extends AppCompatActivity {
             // remove from favs
         }
     }
+
+    // TODO USE ENUMS
 }
