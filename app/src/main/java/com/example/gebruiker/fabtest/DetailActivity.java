@@ -35,15 +35,17 @@ public class DetailActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.tvDetailTimestamp)).setText(entry.getTimestamp());
         ((TextView)findViewById(R.id.tvDetailMood)).setText(entry.getMood());
         ((TextView)findViewById(R.id.tvDetailContent)).setText(entry.getContent());
+        ((CheckBox)findViewById((R.id.favouriteCheck))).setChecked(entry.isFavourite() == 1);
     }
 
     public void addToFavourites(View view) {
 
         CheckBox c = (CheckBox) view;
-        boolean isFavourite = entry.isFavourite();
-        int id = entry.getId();
-
-        EntryDatabase.getInstance(getApplicationContext()).toggleFavourite(id, isFavourite);
+        int isFav = 0;
+        if(c.isChecked()) {
+            isFav = 1;
+        }
+        EntryDatabase.getInstance(getApplicationContext()).toggleFavourite(entry.getId(),  isFav);
 
 
     }

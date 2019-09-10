@@ -28,6 +28,7 @@ public class EntryAdapter extends ResourceCursorAdapter {
         String title = cursor.getString(cursor.getColumnIndex(EntryDatabase.ENTRY_TITLE));
         String timestamp = cursor.getString(cursor.getColumnIndex(EntryDatabase.ENTRY_TIMESTAMP));
         String mood = cursor.getString(cursor.getColumnIndex(EntryDatabase.ENTRY_MOOD));
+        int favourite = cursor.getInt(cursor.getColumnIndex(EntryDatabase.ENTRY_FAVOURITE));
 
         switch(mood) {
             case "sad":

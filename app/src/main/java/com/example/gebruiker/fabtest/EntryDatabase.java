@@ -19,7 +19,7 @@ public class EntryDatabase extends SQLiteOpenHelper {
     public static final String ENTRY_CONTENT = "subject";
     public static final String ENTRY_TITLE = "title";
     public static final String ENTRY_MOOD = "mood";
-    public static final String ENTRY_FAVOURITE = "mood";
+    public static final String ENTRY_FAVOURITE = "favourite";
     public static final String ENTRY_TIMESTAMP = "entrytimestamp";
 
     // Creating table query
@@ -106,13 +106,13 @@ public class EntryDatabase extends SQLiteOpenHelper {
         database.delete(TABLE_NAME, whereClause, whereArgs);
     }
 
-    public void toggleFavourite(int id, boolean currentState) {
+    public void toggleFavourite(int id, int currentState) {
         SQLiteDatabase database = instance.getWritableDatabase();
         String whereClause = ENTRY_ID + "=?";
         String[] whereArgs = new String[] { String.valueOf(id) };
 
         ContentValues cv = new ContentValues();
-        cv.put("favourite", !currentState);
+        cv.put("favourite", currentState);
 
         database.update(TABLE_NAME, cv, whereClause, whereArgs);
     }

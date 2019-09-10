@@ -10,8 +10,7 @@ public class Entry implements Serializable {
 
     private String title, content, mood;
     private String timestamp;
-    private int id;
-    boolean isFavourite;
+    private int id, isFavourite;
 
     public Entry(String title, String content, String mood) {
         this.title = title;
@@ -66,11 +65,11 @@ public class Entry implements Serializable {
         this.timestamp = timestamp;
     }
 
-    public boolean isFavourite() {
+    public int isFavourite() {
         return isFavourite;
     }
 
-    public void setFavourite(boolean favourite) {
+    public void setFavourite(int favourite) {
         isFavourite = favourite;
     }
 }
