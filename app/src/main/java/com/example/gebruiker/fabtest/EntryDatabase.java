@@ -19,6 +19,7 @@ public class EntryDatabase extends SQLiteOpenHelper {
     public static final String ENTRY_CONTENT = "subject";
     public static final String ENTRY_TITLE = "title";
     public static final String ENTRY_MOOD = "mood";
+    public static final String ENTRY_FAVOURITE = "mood";
     public static final String ENTRY_TIMESTAMP = "entrytimestamp";
 
     // Creating table query
@@ -27,6 +28,7 @@ public class EntryDatabase extends SQLiteOpenHelper {
             ENTRY_TITLE + " TEXT NOT NULL, " +
             ENTRY_MOOD + " TEXT NOT NULL, " +
             ENTRY_CONTENT + " TEXT NOT NULL, " +
+            ENTRY_FAVOURITE + " INTEGER DEFAULT 0, " +
             ENTRY_TIMESTAMP + " DATETIME DEFAULT (DATETIME(CURRENT_TIMESTAMP, 'LOCALTIME'))" + ");";
 
     private static EntryDatabase instance;
@@ -102,5 +104,16 @@ public class EntryDatabase extends SQLiteOpenHelper {
         String whereClause = ENTRY_ID + "=?";
         String[] whereArgs = new String[] { String.valueOf(id) };
         database.delete(TABLE_NAME, whereClause, whereArgs);
+    }
+
+    public void toggleFavourite(int id, boolean currentState) {
+        SQLiteDatabase database = instance.getWritableDatabase();
+        String whereClause = ENTRY_ID + "=?";
+        String[] whereArgs = new String[] { String.valueOf(id) };
+
+        ContentValues cv = new ContentValues();
+        cv.put("favourite", !currentState);
+
+        database.update(TABLE_NAME, cv, whereClause, whereArgs);
     }
 }

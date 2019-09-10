@@ -12,13 +12,15 @@ import android.widget.TextView;
 */
 public class DetailActivity extends AppCompatActivity {
 
+    Entry entry;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
         Intent intent = getIntent();
-        Entry entry = (Entry) intent.getSerializableExtra("entry");
+        entry = (Entry) intent.getSerializableExtra("entry");
 
         if(entry != null) {
             updateUI(entry);
@@ -38,13 +40,12 @@ public class DetailActivity extends AppCompatActivity {
     public void addToFavourites(View view) {
 
         CheckBox c = (CheckBox) view;
+        boolean isFavourite = entry.isFavourite();
+        int id = entry.getId();
 
-        if (c.isChecked()) {
-            // add to favs
-        }
-        else {
-            // remove from favs
-        }
+        EntryDatabase.getInstance(getApplicationContext()).toggleFavourite(id, isFavourite);
+
+
     }
 
     // TODO USE ENUMS

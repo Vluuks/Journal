@@ -11,6 +11,7 @@ public class Entry implements Serializable {
     private String title, content, mood;
     private String timestamp;
     private int id;
+    boolean isFavourite;
 
     public Entry(String title, String content, String mood) {
         this.title = title;
@@ -63,5 +64,13 @@ public class Entry implements Serializable {
 
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
     }
 }
