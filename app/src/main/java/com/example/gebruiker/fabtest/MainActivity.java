@@ -56,12 +56,15 @@ public class MainActivity extends AppCompatActivity {
 
             Cursor cursor = (Cursor) adapterView.getItemAtPosition(i);
 
+            int id = cursor.getInt(cursor.getColumnIndex(EntryDatabase.ENTRY_ID));
+            int favourite = cursor.getInt(cursor.getColumnIndex(EntryDatabase.ENTRY_FAVOURITE));
             String title = cursor.getString(cursor.getColumnIndex(EntryDatabase.ENTRY_TITLE));
             String content = cursor.getString(cursor.getColumnIndex(EntryDatabase.ENTRY_CONTENT));
             String timestamp = cursor.getString(cursor.getColumnIndex(EntryDatabase.ENTRY_TIMESTAMP));
             String mood = cursor.getString(cursor.getColumnIndex(EntryDatabase.ENTRY_MOOD));
 
-            Entry entry = new Entry(title, content, mood, timestamp);
+
+            Entry entry = new Entry(id, title, content, mood, timestamp, favourite);
 
             Intent intent = new Intent(MainActivity.this, DetailActivity.class);
             intent.putExtra("entry", entry);

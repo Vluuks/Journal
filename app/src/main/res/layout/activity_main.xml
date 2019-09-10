@@ -23,5 +23,5 @@
         android:onClick="addEntry"
         app:fabSize="normal"
         android:src="@drawable/add"
-        android:layout_margin="10dp"/>
+        android:layout_margin="20dp"/>
 </android.support.design.widget.CoordinatorLayout>

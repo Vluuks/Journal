@@ -18,11 +18,13 @@ public class Entry implements Serializable {
         this.mood = mood;
     }
 
-    public Entry(String title, String content, String mood, String timestamp) {
+    public Entry(int id, String title, String content, String mood, String timestamp, int favourite) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.mood = mood;
         this.timestamp = timestamp;
+        this.isFavourite = favourite;
     }
 
     public int getId() {

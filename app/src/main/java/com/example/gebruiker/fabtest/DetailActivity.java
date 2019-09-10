@@ -3,6 +3,7 @@ package com.example.gebruiker.fabtest;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -45,10 +46,10 @@ public class DetailActivity extends AppCompatActivity {
         if(c.isChecked()) {
             isFav = 1;
         }
+
+        Log.d("detailact", "addToFavourites: " + isFav);
+
         EntryDatabase.getInstance(getApplicationContext()).toggleFavourite(entry.getId(),  isFav);
 
-
     }
-
-    // TODO USE ENUMS
 }

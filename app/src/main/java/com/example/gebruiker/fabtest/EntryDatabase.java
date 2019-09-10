@@ -112,8 +112,12 @@ public class EntryDatabase extends SQLiteOpenHelper {
         String[] whereArgs = new String[] { String.valueOf(id) };
 
         ContentValues cv = new ContentValues();
-        cv.put("favourite", currentState);
+        cv.put(ENTRY_FAVOURITE, currentState);
 
-        database.update(TABLE_NAME, cv, whereClause, whereArgs);
+        int test = database.update(TABLE_NAME, cv, whereClause, whereArgs);
+
+//        database.update(TABLE_NAME, cv, null, null);
+        Log.d("dbcode", "toggleFavourite: " + test);
+        Log.d("id", "toggleFavourite: " +  id);
     }
 }

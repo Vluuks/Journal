@@ -3,6 +3,7 @@ package com.example.gebruiker.fabtest;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.widget.ResourceCursorAdapter;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,10 +26,15 @@ public class EntryAdapter extends ResourceCursorAdapter {
         TextView tvMood = view.findViewById(R.id.tvMood);
         ImageView ivMood = view.findViewById(R.id.imageView);
 
+        int id = cursor.getInt(cursor.getColumnIndex(EntryDatabase.ENTRY_ID));
+        Log.d("id", "adap: " +  id);
+
         String title = cursor.getString(cursor.getColumnIndex(EntryDatabase.ENTRY_TITLE));
         String timestamp = cursor.getString(cursor.getColumnIndex(EntryDatabase.ENTRY_TIMESTAMP));
         String mood = cursor.getString(cursor.getColumnIndex(EntryDatabase.ENTRY_MOOD));
-        int favourite = cursor.getInt(cursor.getColumnIndex(EntryDatabase.ENTRY_FAVOURITE));
+        boolean favourite = (cursor.getInt(cursor.getColumnIndex(EntryDatabase.ENTRY_FAVOURITE)) == 1);
+
+        Log.d("el adapteroni", "bindView: " + favourite);
 
         switch(mood) {
             case "sad":
@@ -49,5 +55,10 @@ public class EntryAdapter extends ResourceCursorAdapter {
         tvTitle.setText(title);
         tvTimestamp.setText(timestamp);
         tvMood.setText(mood);
+
+        ((ImageView) view.findViewById(R.id.isFavourite)).setVisibility(View.INVISIBLE);
+        if(favourite) {
+            ((ImageView) view.findViewById(R.id.isFavourite)).setVisibility(View.VISIBLE);
+        }
     }
 }

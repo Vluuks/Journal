@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.gebruiker.fabtest.DetailActivity"
-    android:layout_margin="10dp">
+    android:layout_margin="20dp">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -28,13 +28,11 @@
             android:id="@+id/favouriteCheck"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
             android:layout_gravity="right|end"
+            android:checked="false"
             android:gravity="end"
-            android:drawableRight="@drawable/add"
-            android:button="@null"
             android:onClick="addToFavourites"
-            />
+            android:text="" />
 
     </FrameLayout>
 
