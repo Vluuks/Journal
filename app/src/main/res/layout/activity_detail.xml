@@ -27,11 +27,16 @@
         android:id="@+id/favouriteCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:checked="false"
         android:gravity="end"
         android:onClick="addToFavourites"
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.953"
+        app:layout_constraintStart_toEndOf="@+id/tvDetailTitle"
         app:layout_constraintTop_toTopOf="parent" />
 
 

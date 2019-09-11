@@ -114,10 +114,20 @@ public class EntryDatabase extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
         cv.put(ENTRY_FAVOURITE, currentState);
 
-        int test = database.update(TABLE_NAME, cv, whereClause, whereArgs);
+        database.update(TABLE_NAME, cv, whereClause, whereArgs);
+    }
 
-//        database.update(TABLE_NAME, cv, null, null);
-        Log.d("dbcode", "toggleFavourite: " + test);
-        Log.d("id", "toggleFavourite: " +  id);
+    public void updateEntry(Entry entry) {
+
+        SQLiteDatabase database = instance.getWritableDatabase();
+        String whereClause = ENTRY_ID + "=?";
+        String[] whereArgs = new String[] { String.valueOf(entry.getId()) };
+
+        ContentValues cv = new ContentValues();
+        cv.put(ENTRY_TITLE, entry.getTitle());
+        cv.put(ENTRY_CONTENT, entry.getContent());
+        cv.put(ENTRY_MOOD, entry.getMood());
+
+        database.update(TABLE_NAME, cv, whereClause, whereArgs);
     }
 }

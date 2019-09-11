@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -17,13 +18,15 @@ import android.widget.Toast;
 public class EntryActivity extends AppCompatActivity {
 
     String mood;
+    boolean inEditMode = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entry);
 
-        if(getIntent().getBooleanExtra("EDIT_MODE", false)) {
+        inEditMode = getIntent().getBooleanExtra("EDIT_MODE", false);
+        if(inEditMode) {
             Log.d("TEST", "onCreate: should be recreated");
 
             // Update UI
@@ -32,6 +35,8 @@ public class EntryActivity extends AppCompatActivity {
             ((EditText) findViewById(R.id.etContent)).setText(entry.getContent());
 
             restoreMood(entry.getMood());
+            ((Button)findViewById(R.id.button)).setText("Edit entry!");
+
         }
 
     }
@@ -86,7 +91,9 @@ public class EntryActivity extends AppCompatActivity {
         }
     }
 
-    /* Method that resets all buttons to original color except the one that was clicked. */
+    /*
+        Method that resets all buttons to original color except the one that was clicked.
+    */
     public void resetButtonColors(int id) {
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.moodLayout);
@@ -117,9 +124,22 @@ public class EntryActivity extends AppCompatActivity {
         String content = ((EditText)findViewById(R.id.etContent)).getText().toString();
 
         if (validateEntry(title, content, mood)) {
-            Entry entry = new Entry(title, content, mood);
+
             EntryDatabase database = EntryDatabase.getInstance(this);
-            database.insert(entry);
+
+            if(!inEditMode){
+                Entry entry = new Entry(title, content, mood);
+                database.insert(entry);
+            }
+            else {
+
+                Entry entry = (Entry) getIntent().getSerializableExtra("ENTRY_TO_EDIT");
+                entry.setTitle(title);
+                entry.setContent(content);
+                entry.setMood(mood);
+                
+                database.updateEntry(entry);
+            }
 
             finish();
         }
