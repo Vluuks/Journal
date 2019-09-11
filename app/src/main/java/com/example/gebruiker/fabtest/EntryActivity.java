@@ -137,7 +137,7 @@ public class EntryActivity extends AppCompatActivity {
                 entry.setTitle(title);
                 entry.setContent(content);
                 entry.setMood(mood);
-                
+
                 database.updateEntry(entry);
             }
 

@@ -61,4 +61,14 @@ public class DetailActivity extends AppCompatActivity {
 
         startActivity(intent);
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(entry != null) {
+            entry.getId();
+        }
+    }
 }

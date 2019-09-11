@@ -130,4 +130,23 @@ public class EntryDatabase extends SQLiteOpenHelper {
 
         database.update(TABLE_NAME, cv, whereClause, whereArgs);
     }
+
+    public Entry selectEntry(int id) {
+        SQLiteDatabase database = instance.getWritableDatabase();
+        String whereClause = ENTRY_ID + "=?";
+        String[] whereArgs = new String[] { String.valueOf(id) };
+
+//        database.query(TABLE_NAME, null, whereClause, whereArgs);
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + ENTRY_ID + " = ?";
+        Cursor cursor = database.rawQuery(query, whereArgs);
+
+        int favourite = cursor.getInt(cursor.getColumnIndex(EntryDatabase.ENTRY_FAVOURITE));
+        String title = cursor.getString(cursor.getColumnIndex(EntryDatabase.ENTRY_TITLE));
+        String content = cursor.getString(cursor.getColumnIndex(EntryDatabase.ENTRY_CONTENT));
+        String timestamp = cursor.getString(cursor.getColumnIndex(EntryDatabase.ENTRY_TIMESTAMP));
+        String mood = cursor.getString(cursor.getColumnIndex(EntryDatabase.ENTRY_MOOD));
+
+        Entry entry = new Entry(id, title, content, mood, timestamp, favourite);
+        return entry;
+    }
 }
