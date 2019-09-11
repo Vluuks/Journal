@@ -52,4 +52,13 @@ public class DetailActivity extends AppCompatActivity {
         EntryDatabase.getInstance(getApplicationContext()).toggleFavourite(entry.getId(),  isFav);
 
     }
+
+    public void editEntry(View view) {
+        Intent intent = new Intent(DetailActivity.this, EntryActivity.class);
+
+        intent.putExtra("EDIT_MODE", true);
+        intent.putExtra("ENTRY_TO_EDIT", entry);
+
+        startActivity(intent);
+    }
 }

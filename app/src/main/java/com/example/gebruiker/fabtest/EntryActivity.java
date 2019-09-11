@@ -1,8 +1,10 @@
 package com.example.gebruiker.fabtest;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -20,6 +22,44 @@ public class EntryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entry);
+
+        if(getIntent().getBooleanExtra("EDIT_MODE", false)) {
+            Log.d("TEST", "onCreate: should be recreated");
+
+            // Update UI
+            Entry entry = (Entry) getIntent().getSerializableExtra("ENTRY_TO_EDIT");
+            ((EditText) findViewById(R.id.etTitle)).setText(entry.getTitle());
+            ((EditText) findViewById(R.id.etContent)).setText(entry.getContent());
+
+            restoreMood(entry.getMood());
+        }
+
+    }
+
+    /*
+        Resets the selected mood if we are restoring from an existing entry.
+     */
+    public void restoreMood(String mood) {
+
+        int id;
+        switch(mood) {
+            case "sad" :
+                id = R.id.mood1;
+                break;
+            case "meh" :
+                id = R.id.mood2;
+                break;
+            case "good" :
+                id = R.id.mood3;
+                break;
+            case "great" :
+                id = R.id.mood4;
+                break;
+            default :
+                id = R.id.mood4;
+        }
+
+        ((ImageButton)findViewById(id)).setBackground(getResources().getDrawable(R.drawable.button_mood_selected));
     }
 
     public void setMood(View view) {

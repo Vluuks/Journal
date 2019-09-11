@@ -70,4 +70,18 @@
         android:textColor="@color/colorPrimaryDark"
         />
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit entry!"
+        android:onClick="editEntry"
+        android:background="@drawable/button"
+        android:layout_margin="3dp"
+        android:textStyle="bold"
+        android:fontFamily="@font/behindgreeneyes"
+        android:textAllCaps="false"
+        android:textSize="30dp"
+        android:textColor="@color/colorPrimaryDark"/>
+
 </LinearLayout>

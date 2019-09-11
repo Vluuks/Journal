@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void addEntry(View view) {
         Intent intent = new Intent(MainActivity.this, EntryActivity.class);
+        intent.putExtra("EDIT_MODE", false);
         startActivity(intent);
     }
 
