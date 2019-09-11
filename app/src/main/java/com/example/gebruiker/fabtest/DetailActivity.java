@@ -67,8 +67,10 @@ public class DetailActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+        // Restore from edit
         if(entry != null) {
-            entry.getId();
+            entry = EntryDatabase.getInstance(getApplicationContext()).selectEntry(entry.getId());
+            updateUI(entry);
         }
     }
 }

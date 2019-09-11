@@ -132,13 +132,13 @@ public class EntryDatabase extends SQLiteOpenHelper {
     }
 
     public Entry selectEntry(int id) {
+
         SQLiteDatabase database = instance.getWritableDatabase();
-        String whereClause = ENTRY_ID + "=?";
         String[] whereArgs = new String[] { String.valueOf(id) };
 
-//        database.query(TABLE_NAME, null, whereClause, whereArgs);
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + ENTRY_ID + " = ?";
         Cursor cursor = database.rawQuery(query, whereArgs);
+        cursor.moveToFirst();
 
         int favourite = cursor.getInt(cursor.getColumnIndex(EntryDatabase.ENTRY_FAVOURITE));
         String title = cursor.getString(cursor.getColumnIndex(EntryDatabase.ENTRY_TITLE));
@@ -146,7 +146,7 @@ public class EntryDatabase extends SQLiteOpenHelper {
         String timestamp = cursor.getString(cursor.getColumnIndex(EntryDatabase.ENTRY_TIMESTAMP));
         String mood = cursor.getString(cursor.getColumnIndex(EntryDatabase.ENTRY_MOOD));
 
-        Entry entry = new Entry(id, title, content, mood, timestamp, favourite);
-        return entry;
+        return new Entry(id, title, content, mood, timestamp, favourite);
+
     }
 }
